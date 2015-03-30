@@ -6,12 +6,16 @@ Description: Displays gravatars of customers who have purchased your product
 Version: 1.0
 Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com/
+Text Domain: edd-pg
+Domain Path: languages
 License: GPL-2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 
@@ -78,7 +82,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 		 * @param int|string|object $id_or_email A user ID, email address, or comment object
 		 * @return bool if the gravatar exists or not
 		 */
-		
+
 		// https://gist.github.com/justinph/5197810
 		function validate_gravatar( $id_or_email ) {
 		  //id or email code borrowed from wp-includes/pluggable.php
@@ -93,7 +97,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 				$allowed_comment_types = apply_filters( 'get_avatar_comment_types', array( 'comment' ) );
 				if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) )
 					return false;
-		 
+
 				if ( !empty( $id_or_email->user_id ) ) {
 					$id = (int) $id_or_email->user_id;
 					$user = get_userdata( $id );
@@ -105,10 +109,10 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 			} else {
 				$email = $id_or_email;
 			}
-		 
+
 			$hashkey = md5( strtolower( trim( $email ) ) );
 			$uri = 'http://www.gravatar.com/avatar/' . $hashkey . '?d=404';
-		 
+
 			$data = wp_cache_get( $hashkey );
 			if ( false === $data ) {
 				$response = wp_remote_head( $uri );
@@ -118,8 +122,8 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 					$data = $response['response']['code'];
 				}
 			    wp_cache_set( $hashkey, $data, $group = '', $expire = 60*5 );
-		 
-			}		
+
+			}
 			if ( $data == '200' ) {
 				return true;
 			} else {
@@ -129,7 +133,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 
 		/**
 		 * Get an array of all the log IDs using the EDD Logging Class
-		 * 
+		 *
 		 * @since 1.0
 		 * @param $download_id Download's ID
 		 * @return array $log_ids
@@ -153,7 +157,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 				// return our array
 				return $log_ids;
 			}
-			
+
 			return null;
 
 		}
@@ -161,13 +165,13 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 
 		/**
 		 * Get array of unique payment IDs
-		 * 
+		 *
 		 * @since 1.0
 		 * @param int $download_id Download ID
 		 * @return array $unique_ids
 		*/
 		function get_payment_ids( $download_id = '' ) {
-			
+
 			global $edd_options;
 
 			$log_ids = $this->get_log_ids( $download_id );
@@ -180,7 +184,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 					// get the payment ID for each corresponding log ID
 					$payment_ids[] = get_post_meta( $id, '_edd_log_payment_id', true );
 				}
-				
+
 				// remove customers who have purchased more than once so we can have unique gravatar imagesw
 				$unique_emails = array();
 
@@ -192,10 +196,10 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 						if ( ! $this->validate_gravatar( $email ) ) {
 							continue;
 						}
-					}	
+					}
 
-					$unique_emails[$id] = get_post_meta( $id, '_edd_payment_user_email', true );	
-					
+					$unique_emails[$id] = get_post_meta( $id, '_edd_payment_user_email', true );
+
 				}
 
 				// strip duplicate emails
@@ -209,16 +213,16 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 				// randomize the payment IDs if enabled
 				if ( isset( $edd_options['edd_pg_random_gravatars'] ) ) {
 					shuffle( $unique_ids );
-				}	
+				}
 
 				// return our unique IDs
 				return $unique_ids;
 
 			}
-				
+
 		}
 
-	
+
 		/**
 		 * Gravatars
 		 *
@@ -226,12 +230,12 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 		*/
 		function gravatars( $download_id = false, $title = '' ) {
 
-			// unique $payment_ids 
+			// unique $payment_ids
 			$payment_ids = $this->get_payment_ids( $download_id );
 
 			//	var_dump( $payment_ids );
 			//	 var_dump( $this->get_log_ids( get_the_ID() ) );
-			
+
 			global $edd_options;
 
 			// return if no ID
@@ -245,19 +249,19 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 					return;
 			}
 
-			ob_start(); 
+			ob_start();
 
 			echo '<div class="edd-purchase-gravatars">';
 
 			if ( isset ( $title ) ) {
 
 				if ( $title ) {
-					echo apply_filters( 'edd_pg_title', '<h2>' . esc_attr( $title ) .'</h2>' ); 
+					echo apply_filters( 'edd_pg_title', '<h2>' . esc_attr( $title ) .'</h2>' );
 				}
 				elseif ( isset( $edd_options['edd_pg_heading'] ) ) {
-					echo apply_filters( 'edd_pg_title', '<h2>' . esc_attr( $edd_options['edd_pg_heading'] ) .'</h2>' ); 
+					echo apply_filters( 'edd_pg_title', '<h2>' . esc_attr( $edd_options['edd_pg_heading'] ) .'</h2>' );
 				}
-				
+
 			}
 
 			$i = 0;
@@ -280,10 +284,10 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 
 					// get customer's email
 					$email = get_post_meta( $id, '_edd_payment_user_email', true );
-					
+
 					// set gravatar size and provide filter
 					$size = isset( $edd_options['edd_pg_gravatar_size'] ) ? apply_filters( 'edd_pg_gravatar_size', $edd_options['edd_pg_gravatar_size'] ) : '';
-					
+
 					// default image
 					$default_image = apply_filters( 'edd_pg_gravatar_default_image', false );
 
@@ -294,9 +298,9 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 
 				} // end foreach
 			}
-			
+
 			echo '</div>';
-			
+
 			?>
 
 		<?php
@@ -325,7 +329,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 					'title' => ''
 				), $atts, 'edd_purchase_gravatars' )
 			);
-			
+
 			// if no ID is passed on single download pags, get the correct ID
 			if ( is_singular( 'download' ) )
 				$id = get_the_ID();
@@ -333,9 +337,9 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 			$content = $this->gravatars( $id, $title );
 
 			return $content;
-		
+
 		}
-		
+
 		/**
 		 * Settings
 		 *
@@ -349,7 +353,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 					'name' => '<strong>' . __( 'Purchase Gravatars', 'edd-pg' ) . '</strong>',
 					'type' => 'header'
 				),
-				
+
 				array(
 					'id' => 'edd_pg_heading',
 					'name' => __( 'Heading', 'edd-pg' ),
@@ -394,7 +398,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 
 			return array_merge( $settings, $edd_pg_settings );
 		}
-		
+
 	}
 
 }
@@ -431,23 +435,23 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars_Widget' ) ) {
 	    	$edd_label_singular = function_exists('edd_get_label_singular') ? strtolower( edd_get_label_singular() ) : null;
 
 	        // widget settings
-	        $widget_ops = array( 
-	            'classname' => 'purchase-gravatars', 
+	        $widget_ops = array(
+	            'classname' => 'purchase-gravatars',
 	            'description' => sprintf( __( 'Displays gravatars of customers who have purchased your %s. Will only show on the single %s page.', 'edd-pg' ), $edd_label_singular, $edd_label_singular )
 	        );
 
 	        // widget control settings
-	        $control_ops = array( 
-	            'width' => 250, 
-	            'height' => 350, 
+	        $control_ops = array(
+	            'width' => 250,
+	            'height' => 350,
 	            'id_base' => 'edd_pg_widget'
 	        );
 
 	        // create the widget
-	        $this->WP_Widget( 
-	            'edd_pg_widget', 
-	            __( 'EDD Purchase Gravatars', 'edd-pg' ), 
-	            $widget_ops, 
+	        $this->WP_Widget(
+	            'edd_pg_widget',
+	            __( 'EDD Purchase Gravatars', 'edd-pg' ),
+	            $widget_ops,
 	            $control_ops
 	        );
 
@@ -467,14 +471,14 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars_Widget' ) ) {
 
 	        // Variables from widget settings
 	        $title = apply_filters( 'widget_title', $instance['title'] );
-	    
+
 	        // Used by themes. Opens the widget
 	        echo $before_widget;
 
 	        // Display the widget title
-	        if ( $title ) 
+	        if ( $title )
 	            echo $before_title . $title . $after_title;
-	        
+
 	        $gravatars = new EDD_Purchase_Gravatars();
 
 			echo $gravatars->gravatars( get_the_ID(), null ); // remove title
@@ -492,7 +496,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars_Widget' ) ) {
 	        $instance = $old_instance;
 
 	        $instance['title'] = strip_tags( $new_instance['title'] );
-	                    
+
 	        return $instance;
 
 	    } // end UPDATE function
@@ -500,7 +504,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars_Widget' ) ) {
 	    /*
 	     * Form function. Displays the actual form on the widget page
 	     */
-	    function form( $instance ) { 
+	    function form( $instance ) {
 
 	        // Set up some default widget settings.
 	        $defaults = array(
@@ -508,7 +512,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars_Widget' ) ) {
 	        );
 
 	        $instance = wp_parse_args( (array) $instance, $defaults ); ?>
-	        
+
 	        <!-- Title -->
 	        <p>
 	            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'edd-pg' ) ?></label>
