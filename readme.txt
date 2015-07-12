@@ -36,7 +36,7 @@ To show the purchase gravatars on a single download, add this shortcode into the
 
 To show the purchase gravatars of a particular download on another page or download, add the id parameter. This example will show the download with an ID of 942.
 
-    [edd_purchase_gravatars id="942"]    
+    [edd_purchase_gravatars id="942"]
 
 To show the purchase gravatars with a custom title, use the title parameter. This will override the heading in the main plugin options
 
@@ -44,7 +44,7 @@ To show the purchase gravatars with a custom title, use the title parameter. Thi
 
 **Template Tag usage**
 
-This example will show the purchase gravatars of whichever single download it is placed on. 
+This example will show the purchase gravatars of whichever single download it is placed on.
 
     $gravatars = new EDD_Purchase_Gravatars();
     echo $gravatars->gravatars( get_the_ID() );
@@ -57,7 +57,7 @@ If you'd like to show purchase gravatars of a specific download from somewhere e
 To show a custom title, pass in your title as the 2nd parameter
 
     $gravatars = new EDD_Purchase_Gravatars();
-    echo $gravatars->gravatars( get_the_ID(), 'This is my custom title' );  
+    echo $gravatars->gravatars( get_the_ID(), 'This is my custom title' );
 
 **Widget usage**
 
@@ -75,10 +75,10 @@ Shop Front was designed to be simple, responsive and lightweight. It has only th
 
 **Stay up to date**
 
-*Become a fan on Facebook* 
+*Become a fan on Facebook*
 [http://www.facebook.com/sumobicom](http://www.facebook.com/sumobicom "Facebook")
 
-*Follow me on Twitter* 
+*Follow me on Twitter*
 [http://twitter.com/sumobi_](http://twitter.com/sumobi_ "Twitter")
 
 == Installation ==
@@ -106,13 +106,17 @@ The default avatar can be changed from Settings -> Discussion. If you are a deve
 == Screenshots ==
 
 1. Using the [edd_purchase_gravatars] shortcode
-1. Using the widget in a theme's sidebar 
+1. Using the widget in a theme's sidebar
 1. The settings screen in Easy Digital Download's extension tab
 1. The widget
 
 == Changelog ==
 
+= 1.0.2 =
+* Fix: Removed PHP 4 style constructors
+
 = 1.0.1 =
 * New: Added edd_pg_name filter for the image's alt tag
+
 = 1.0 =
 * Initial release
