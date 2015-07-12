@@ -6,12 +6,16 @@ Description: Displays gravatars of customers who have purchased your product
 Version: 1.0.2
 Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com/
+Text Domain: edd-pg
+Domain Path: languages
 License: GPL-2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 
@@ -451,7 +455,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars_Widget' ) ) {
 
 	        // create the widget
 			parent::__construct( 'edd_pg_widget', __( 'EDD Purchase Gravatars', 'edd-pg' ), $widget_ops, $control_ops );
-
+			
 	    } // end constructor
 
 	    /*
