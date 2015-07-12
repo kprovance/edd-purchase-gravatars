@@ -112,11 +112,10 @@ The default avatar can be changed from Settings -> Discussion. If you are a deve
 
 == Changelog ==
 
-= 1.0.2 =
-* Fix: Removed PHP 4 style constructors
-
 = 1.0.1 =
 * New: Added edd_pg_name filter for the image's alt tag
+* New: French translations, props fxbenard
+* Fix: Removed PHP 4 style constructors
 
 = 1.0 =
 * Initial release

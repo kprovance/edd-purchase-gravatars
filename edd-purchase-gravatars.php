@@ -3,7 +3,7 @@
 Plugin Name: Easy Digital Downloads - Purchase Gravatars
 Plugin URI: http://sumobi.com/shop/edd-purchase-gravatars/
 Description: Displays gravatars of customers who have purchased your product
-Version: 1.0.2
+Version: 1.0.1
 Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com/
 Text Domain: edd-pg
@@ -455,7 +455,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars_Widget' ) ) {
 
 	        // create the widget
 			parent::__construct( 'edd_pg_widget', __( 'EDD Purchase Gravatars', 'edd-pg' ), $widget_ops, $control_ops );
-			
+
 	    } // end constructor
 
 	    /*
