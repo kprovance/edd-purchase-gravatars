@@ -1,10 +1,10 @@
 === EDD Purchase Gravatars ===
-Contributors: sumobi
+Contributors: easydigitaldownloads, sumobi
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EFUPMPEZPGW7L
 Tags: easy digital downloads, digital downloads, e-downloads, edd, sumobi, purchase, gravatars, e-commerce
 Requires at least: 3.3
 Tested up to: 4.2.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,9 @@ The default avatar can be changed from Settings -> Discussion. If you are a deve
 1. The widget
 
 == Changelog ==
+
+= 1.0.2 =
+* Fix: Use EDD_Payment for customer information to avoid nested calls to maybe_unserialize.
 
 = 1.0.1 =
 * New: Added edd_pg_name filter for the image's alt tag

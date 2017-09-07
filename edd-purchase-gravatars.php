@@ -3,7 +3,7 @@
 Plugin Name: Easy Digital Downloads - Purchase Gravatars
 Plugin URI: http://sumobi.com/shop/edd-purchase-gravatars/
 Description: Displays gravatars of customers who have purchased your product
-Version: 1.0.1
+Version: 1.0.2
 Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com/
 Text Domain: edd-pg
@@ -270,20 +270,17 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 				foreach ( $payment_ids as $id ) {
 
 					// EDD saves a blank option even when the control is turned off, hence the extra check
-					if ( isset( $edd_options['edd_pg_maximum_number'] ) && '' != $edd_options['edd_pg_maximum_number'] && $i == $edd_options['edd_pg_maximum_number'] )
+					if ( isset( $edd_options['edd_pg_maximum_number'] ) && '' != $edd_options['edd_pg_maximum_number'] && $i == $edd_options['edd_pg_maximum_number'] ) {
 						continue;
+					}
 
-					// get the payment meta
-					$payment_meta = get_post_meta( $id, '_edd_payment_meta', true );
-
-					// unserialize the payment meta
-					$user_info = maybe_unserialize( $payment_meta['user_info'] );
+					$payment = edd_get_payment( $id );
 
 					// get customer's first name
-					$name = apply_filters( 'edd_pg_name', $user_info['first_name'] );
+					$name = apply_filters( 'edd_pg_name', $payment->first_name );
 
 					// get customer's email
-					$email = get_post_meta( $id, '_edd_payment_user_email', true );
+					$email = $payment->email;
 
 					// set gravatar size and provide filter
 					$size = isset( $edd_options['edd_pg_gravatar_size'] ) ? apply_filters( 'edd_pg_gravatar_size', $edd_options['edd_pg_gravatar_size'] ) : '';
