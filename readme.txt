@@ -1,9 +1,8 @@
 === EDD Purchase Gravatars ===
-Contributors: easydigitaldownloads, sumobi
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EFUPMPEZPGW7L
+Contributors: easydigitaldownloads, sumobi, cklosows
 Tags: easy digital downloads, digital downloads, e-downloads, edd, sumobi, purchase, gravatars, e-commerce
 Requires at least: 3.3
-Tested up to: 4.2.2
+Tested up to: 4.8.1
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +11,7 @@ Displays Gravatars of customers who have purchased your product
 
 == Description ==
 
-This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugins/easy-digital-downloads/ "Easy Digital Downloads"). It outputs gravatars of all the customers who have purchased your product.
+This plugin requires [Easy Digital Downloads](https://wordpress.org/plugins/easy-digital-downloads/ "Easy Digital Downloads"). It outputs gravatars of all the customers who have purchased your product.
 
 It works by using the customer's email that they used to purchase your product, and checking it against Gravatar.com. Only unique email addresses are used, so if a customer purchases your product more than once, it will only show their Gravatar once.
 
@@ -62,24 +61,6 @@ To show a custom title, pass in your title as the 2nd parameter
 **Widget usage**
 
 Drag the widget into your sidebar. If the widget is shown on a single download page, and that download has purchases, the purchase gravatars will be shown.
-
-**More add-ons for Easy Digital Downloads**
-
-You can find more add-ons (both free and commercial) from [Easy Digital Downloads' website](https://easydigitaldownloads.com/extensions/?ref=166 "Easy Digital Downloads")
-
-**Free theme for Easy Digital Downloads**
-
-[http://sumobi.com/shop/shop-front/](http://sumobi.com/shop/shop-front/ "Shop Front")
-
-Shop Front was designed to be simple, responsive and lightweight. It has only the bare essentials, making it the perfect starting point for your next digital e-commerce store. It’s also easily extensible with a growing collection of add-ons to enhance the functionality and styling.
-
-**Stay up to date**
-
-*Become a fan on Facebook*
-[http://www.facebook.com/sumobicom](http://www.facebook.com/sumobicom "Facebook")
-
-*Follow me on Twitter*
-[http://twitter.com/sumobi_](http://twitter.com/sumobi_ "Twitter")
 
 == Installation ==
 

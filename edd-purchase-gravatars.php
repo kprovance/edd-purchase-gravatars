@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Easy Digital Downloads - Purchase Gravatars
-Plugin URI: http://sumobi.com/shop/edd-purchase-gravatars/
+Plugin URI: https://easydigitaldownloads.com/downloads/edd-purchase-gravatars/
 Description: Displays gravatars of customers who have purchased your product
 Version: 1.0.2
-Author: Andrew Munro, Sumobi
-Author URI: http://sumobi.com/
+Author: Easy Digital Downloads
+Author URI: https://easydigitaldownloads.com
 Text Domain: edd-pg
 Domain Path: languages
 License: GPL-2.0+
