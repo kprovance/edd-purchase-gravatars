@@ -334,8 +334,9 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 			);
 
 			// if no ID is passed on single download pags, get the correct ID
-			if ( is_singular( 'download' ) )
+			if ( is_singular( 'download' ) ) {
 				$id = get_the_ID();
+			}
 
 			$content = $this->gravatars( $id, $title );
 
@@ -430,94 +431,96 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars_Widget' ) ) {
 
 	class EDD_Purchase_Gravatars_Widget extends WP_Widget {
 
-	    /*
-	     * widget constructor
-	     */
-	    function edd_purchase_gravatars_widget() {
+		/*
+		 * widget constructor
+		 */
+		function __construct() {
 
-	    	$edd_label_singular = function_exists('edd_get_label_singular') ? strtolower( edd_get_label_singular() ) : null;
+			$edd_label_singular = function_exists('edd_get_label_singular') ? strtolower( edd_get_label_singular() ) : null;
 
-	        // widget settings
-	        $widget_ops = array(
-	            'classname' => 'purchase-gravatars',
-	            'description' => sprintf( __( 'Displays gravatars of customers who have purchased your %s. Will only show on the single %s page.', 'edd-pg' ), $edd_label_singular, $edd_label_singular )
-	        );
+			// widget settings
+			$widget_ops = array(
+				'classname' => 'purchase-gravatars',
+				'description' => sprintf( __( 'Displays gravatars of customers who have purchased your %s. Will only show on the single %s page.', 'edd-pg' ), $edd_label_singular, $edd_label_singular )
+			);
 
-	        // widget control settings
-	        $control_ops = array(
-	            'width' => 250,
-	            'height' => 350,
-	            'id_base' => 'edd_pg_widget'
-	        );
+			// widget control settings
+			$control_ops = array(
+				'width'   => 250,
+				'height'  => 350,
+				'id_base' => 'edd_pg_widget',
+			);
 
-	        // create the widget
+			// create the widget
 			parent::__construct( 'edd_pg_widget', __( 'EDD Purchase Gravatars', 'edd-pg' ), $widget_ops, $control_ops );
 
-	    } // end constructor
+		} // end constructor
 
-	    /*
-	     * Outputs the content of the widget
-	     */
-	    function widget( $args, $instance ) {
-	    	global $edd_options;
+		/*
+		 * Outputs the content of the widget
+		 */
+		function widget( $args, $instance ) {
+			global $edd_options;
 
-	        extract( $args );
+			extract( $args );
 
-	        if ( ! is_singular( 'download' ) )
-	        	return;
+			if ( ! is_singular( 'download' ) ) {
+				return;
+			}
 
-	        // Variables from widget settings
-	        $title = apply_filters( 'widget_title', $instance['title'] );
+			// Variables from widget settings
+			$title = apply_filters( 'widget_title', $instance['title'] );
 
-	        // Used by themes. Opens the widget
-	        echo $before_widget;
+			// Used by themes. Opens the widget
+			echo $before_widget;
 
-	        // Display the widget title
-	        if ( $title )
-	            echo $before_title . $title . $after_title;
+			// Display the widget title
+			if ( $title ) {
+				echo $before_title . $title . $after_title;
+			}
 
-	        $gravatars = new EDD_Purchase_Gravatars();
+			$gravatars = new EDD_Purchase_Gravatars();
 
 			echo $gravatars->gravatars( get_the_ID(), null ); // remove title
 
-	        // Used by themes. Closes the widget
-	        echo $after_widget;
+			// Used by themes. Closes the widget
+			echo $after_widget;
 
-	    } // end WIDGET function
+		} // end WIDGET function
 
-	    /*
-	     * Update function. Processes widget options to be saved
-	     */
-	    function update( $new_instance, $old_instance ) {
+		/*
+		 * Update function. Processes widget options to be saved
+		 */
+		function update( $new_instance, $old_instance ) {
 
-	        $instance = $old_instance;
+			$instance = $old_instance;
 
-	        $instance['title'] = strip_tags( $new_instance['title'] );
+			$instance['title'] = strip_tags( $new_instance['title'] );
 
-	        return $instance;
+			return $instance;
 
-	    } // end UPDATE function
+		} // end UPDATE function
 
-	    /*
-	     * Form function. Displays the actual form on the widget page
-	     */
-	    function form( $instance ) {
+		/*
+		 * Form function. Displays the actual form on the widget page
+		 */
+		function form( $instance ) {
 
-	        // Set up some default widget settings.
-	        $defaults = array(
-	            'title' => '',
-	        );
+			// Set up some default widget settings.
+			$defaults = array(
+				'title' => '',
+			);
 
-	        $instance = wp_parse_args( (array) $instance, $defaults ); ?>
+			$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
-	        <!-- Title -->
-	        <p>
-	            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'edd-pg' ) ?></label>
-	            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $instance['title']; ?>" />
-	        </p>
+			<!-- Title -->
+			<p>
+				<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'edd-pg' ) ?></label>
+				<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $instance['title']; ?>" />
+			</p>
 
 
-	    <?php } // end FORM function
+		<?php } // end FORM function
 
 	}
 }
