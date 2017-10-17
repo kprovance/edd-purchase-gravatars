@@ -2,8 +2,8 @@
 Contributors: easydigitaldownloads, sumobi, cklosows
 Tags: easy digital downloads, digital downloads, e-downloads, edd, sumobi, purchase, gravatars, e-commerce
 Requires at least: 3.3
-Tested up to: 4.8.1
-Stable tag: 1.0.2
+Tested up to: 4.9
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,9 @@ The default avatar can be changed from Settings -> Discussion. If you are a deve
 1. The widget
 
 == Changelog ==
+
+= 1.0.3 =
+* Fix: PHP 7+ compatibility with widget constructor method name.
 
 = 1.0.2 =
 * Fix: Use EDD_Payment for customer information to avoid nested calls to maybe_unserialize.
