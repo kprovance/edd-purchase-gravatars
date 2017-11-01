@@ -64,6 +64,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 			add_action( 'widgets_init',  array( $this, 'register_widget' ) );
 			add_shortcode( 'edd_purchase_gravatars', array( $this, 'shortcode' ) );
 			add_filter( 'edd_settings_extensions', array( $this, 'settings' ) );
+			add_filter( 'edd_settings_sections_extensions', array( $this, 'register_section' ) );
 
 			do_action( 'edd_pg_setup_actions' );
 		}
@@ -345,11 +346,23 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 		}
 
 		/**
+		 * Register section for settings.
+		 *
+		 * @since 1.0.4
+		 * @access public
+		 * @return array $sections Settings sections
+		 */
+		public function register_section( $sections ) {
+			$sections['purchase_gravatars'] = __( 'Purchase Gravatars', 'edd-pg' );
+			return $sections;
+		}
+
+		/**
 		 * Settings
 		 *
 		 * @since 1.0
 		*/
-		public function settings( $settings ) {
+		public function settings( $sections ) {
 
 		  $edd_pg_settings = array(
 				array(
@@ -400,7 +413,13 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 				),
 			);
 
-			return array_merge( $settings, $edd_pg_settings );
+			// If EDD is at version 2.5 or later...
+			if ( version_compare( EDD_VERSION, 2.5, '>=' ) ) {
+				// Use the previously noted array key as an array key again and next your settings
+				$edd_pg_settings = array( 'purchase_gravatars' => $edd_pg_settings );
+			}
+			
+			return array_merge( $sections, $edd_pg_settings );
 		}
 
 	}
