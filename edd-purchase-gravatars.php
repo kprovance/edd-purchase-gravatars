@@ -3,7 +3,7 @@
 Plugin Name: Easy Digital Downloads - Purchase Gravatars
 Plugin URI: https://easydigitaldownloads.com/downloads/edd-purchase-gravatars/
 Description: Displays gravatars of customers who have purchased your product
-Version: 1.0.3
+Version: 1.0.4
 Author: Easy Digital Downloads
 Author URI: https://easydigitaldownloads.com
 Text Domain: edd-pg

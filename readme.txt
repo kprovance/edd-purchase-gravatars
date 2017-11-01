@@ -3,7 +3,7 @@ Contributors: easydigitaldownloads, sumobi, cklosows
 Tags: easy digital downloads, digital downloads, e-downloads, edd, sumobi, purchase, gravatars, e-commerce
 Requires at least: 3.3
 Tested up to: 4.9
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,9 @@ The default avatar can be changed from Settings -> Discussion. If you are a deve
 1. The widget
 
 == Changelog ==
+
+= 1.0.4 =
+* Tweak: Moved extension settings to own "Purchase Gravatars" section
 
 = 1.0.3 =
 * Fix: PHP 7+ compatibility with widget constructor method name.
