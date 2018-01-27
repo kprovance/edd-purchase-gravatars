@@ -66,7 +66,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 			add_filter( 'edd_settings_extensions', array( $this, 'settings' ) );
 			add_filter( 'edd_settings_sections_extensions', array( $this, 'register_section' ) );
 
-			do_action( 'edd_pg_setup_actions' );
+                        do_action( 'edd_pg_setup_actions' );
 		}
 
 		/**
@@ -292,7 +292,22 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 					echo '<span class="edd-purchase-gravatar">';
 
 					// show gravatar
-					echo get_avatar( $email, $size, $default_image, $name );
+                                        global $wp_version;
+                                        
+                                        if ( version_compare( $wp_version, '4.2', '>=' ) ) {
+                                            $data = array(
+                                                'email'         => $email,
+                                                'size'          => $size,
+                                                'default_image' => $default_image,
+                                                'name'          => $name
+                                            );
+                                            
+                                            $args = apply_filters( 'edd_pg_gravatar_args', array(), $data );
+                                            
+                                            echo get_avatar( $email, $size, $default_image, $name, $args );
+                                        } else {
+                                            echo get_avatar( $email, $size, $default_image, $name );
+                                        }
 
 					do_action( 'edd_purchase_gravatars' );
 
