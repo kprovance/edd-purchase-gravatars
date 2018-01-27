@@ -293,7 +293,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 
 					// show gravatar
                                         global $wp_version;
-                                        
+
                                         if ( version_compare( $wp_version, '4.2', '>=' ) ) {
                                             $data = array(
                                                 'email'         => $email,
@@ -301,9 +301,9 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
                                                 'default_image' => $default_image,
                                                 'name'          => $name
                                             );
-                                            
+
                                             $args = apply_filters( 'edd_pg_gravatar_args', array(), $data );
-                                            
+
                                             echo get_avatar( $email, $size, $default_image, $name, $args );
                                         } else {
                                             echo get_avatar( $email, $size, $default_image, $name );
@@ -433,7 +433,7 @@ if ( ! class_exists( 'EDD_Purchase_Gravatars' ) ) {
 				// Use the previously noted array key as an array key again and next your settings
 				$edd_pg_settings = array( 'purchase_gravatars' => $edd_pg_settings );
 			}
-			
+
 			return array_merge( $sections, $edd_pg_settings );
 		}
 
